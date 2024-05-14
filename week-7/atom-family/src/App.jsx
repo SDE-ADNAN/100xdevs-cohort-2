@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import './App.css'
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot, useRecoilValueLoadable } from 'recoil';
 import { todosAtomFamily } from './atoms';
 
 function App() {
@@ -15,14 +15,20 @@ function App() {
 }
 
 function Todo({ id }) {
-  const todo = useRecoilValue(todosAtomFamily(id));
-  return (
-    <>
-      {todo.title}
-      {todo.description}
-      <br />
-    </>
-  )
+  const todo = useRecoilValueLoadable(todosAtomFamily(id));
+
+  if (todo.state === 'loading') {
+    return <div>Loading.....</div>
+  } else {
+    return (
+      <>
+        {todo.contents.title}
+        {todo.contents.description}
+        <br />
+      </>
+    )
+  }
+
 }
 
 export default App
