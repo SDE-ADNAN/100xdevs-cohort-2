@@ -47,10 +47,10 @@ function insertUserData(username, password, email) {
         // safe from sql injection
         const result = yield client.query(`
         INSERT INTO users2 (username,password,email)
-        VALUES ('$1','$2','$3')
-        ;`);
+        VALUES ($1,$2,$3)
+        ;`, [username, password, email]);
         console.log(result);
     });
 }
-insertUserData('user2', 'user2password', 'user2@example.com');
+insertUserData('user3', 'user3password', 'user3@example.com');
 printTable();
