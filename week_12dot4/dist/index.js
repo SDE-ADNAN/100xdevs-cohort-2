@@ -13,6 +13,15 @@ const pg_1 = require("pg");
 const client = new pg_1.Client({
     connectionString: "postgresql://postgres:mysecretpassword@localhost:5432/postgres"
 });
+function printTable() {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield client.connect();
+        const result = yield client.query(`
+        SELECT * FROM users2
+        ;`);
+        console.log(result);
+    });
+}
 function createUsersTable() {
     return __awaiter(this, void 0, void 0, function* () {
         yield client.connect();
@@ -27,4 +36,15 @@ function createUsersTable() {
         console.log(result);
     });
 }
-createUsersTable();
+function insertUserData(username, password, email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield client.connect();
+        const result = yield client.query(`
+        INSERT INTO users2 (username,password,email)
+        VALUES ('${username}','${password}','${email}')
+        ;`);
+        console.log(result);
+    });
+}
+printTable();
+// insertUserData('user1','user1password','user1@example.com')

@@ -4,6 +4,13 @@ import { Client } from 'pg';
 const client = new Client({
     connectionString: "postgresql://postgres:mysecretpassword@localhost:5432/postgres"
 })
+async function printTable(){
+    await client.connect()
+    const result = await client.query(`
+        SELECT * FROM users2
+        ;`)
+    console.log(result)
+}
 async function createUsersTable() {
     await client.connect()
     const result = await client.query(`
@@ -16,5 +23,14 @@ async function createUsersTable() {
         `)
     console.log(result)
 }
+async function insertUserData(username:string,password:string,email:string) {
+    await client.connect()
+    const result = await client.query(`
+        INSERT INTO users2 (username,password,email)
+        VALUES ('${username}','${password}','${email}')
+        ;`)
+    console.log(result)
+}
 
-createUsersTable()
+printTable()
+// insertUserData('user1','user1password','user1@example.com')
