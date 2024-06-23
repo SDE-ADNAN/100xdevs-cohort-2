@@ -33,18 +33,24 @@ function createUsersTable() {
         password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);
         `);
-        console.log(result);
+        console.log(result.rows);
     });
 }
 function insertUserData(username, password, email) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield client.connect();
+        // await client.connect()
+        // sql injection prone
+        // const result = await client.query(`
+        //     INSERT INTO users2 (username,password,email)
+        //     VALUES ('${username}','${password}','${email}')
+        //     ;`)
+        // safe from sql injection
         const result = yield client.query(`
         INSERT INTO users2 (username,password,email)
-        VALUES ('${username}','${password}','${email}')
+        VALUES ('$1','$2','$3')
         ;`);
         console.log(result);
     });
 }
+insertUserData('user2', 'user2password', 'user2@example.com');
 printTable();
-// insertUserData('user1','user1password','user1@example.com')

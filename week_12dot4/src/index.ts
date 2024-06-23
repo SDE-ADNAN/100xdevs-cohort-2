@@ -4,7 +4,8 @@ import { Client } from 'pg';
 const client = new Client({
     connectionString: "postgresql://postgres:mysecretpassword@localhost:5432/postgres"
 })
-async function printTable(){
+
+async function printTable() {
     await client.connect()
     const result = await client.query(`
         SELECT * FROM users2
@@ -21,16 +22,24 @@ async function createUsersTable() {
         password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);
         `)
-    console.log(result)
+    console.log(result.rows)
 }
-async function insertUserData(username:string,password:string,email:string) {
-    await client.connect()
+async function insertUserData(username: string, password: string, email: string) {
+    // await client.connect()
+    // sql injection prone
+    // const result = await client.query(`
+    //     INSERT INTO users2 (username,password,email)
+    //     VALUES ('${username}','${password}','${email}')
+    //     ;`)
+
+    // safe from sql injection
     const result = await client.query(`
         INSERT INTO users2 (username,password,email)
-        VALUES ('${username}','${password}','${email}')
+        VALUES ('$1','$2','$3')
         ;`)
+
     console.log(result)
 }
 
+insertUserData('user2','user2password','user2@example.com')
 printTable()
-// insertUserData('user1','user1password','user1@example.com')
