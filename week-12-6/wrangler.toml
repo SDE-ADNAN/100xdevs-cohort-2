@@ -11,6 +11,9 @@ compatibility_flags = ["nodejs_compat"]
 # [placement]
 # mode = "smart"
 
+
+DATABASE_CONNECTION_POOL_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZDNjZTFjNmUtMDJlOS00Yzk2LWE4MDYtMTJkZGUzZjU1Njg4IiwidGVuYW50X2lkIjoiODZjOGZiYWQ4NGZiNzViNDJmODdmODI3MDdmZjQyZWVjYWU1NDI3Mjc3YmNjMTVjYWYxNzFkNDc1ZTYxNDQ2OCIsImludGVybmFsX3NlY3JldCI6ImU3YjFhN2JhLWYwNDktNDJjZS04NDJiLWMyM2UzZjJmM2JkYSJ9.bHun32RSdi-nYlblFFP-KILVyUdkqPwJbggxctaTrKo"
+
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Docs:
 # - https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
