@@ -8,7 +8,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// url == postgresql://neondb_owner:zuUpF5AImq0G@ep-weathered-river-a5iwvvfq.us-east-2.aws.neon.tech/neondb?sslmode=require
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_CONNECTION_POOL_URL")
+}
+
+model Log{
+  id Int @id @default(autoincrement())
+  level String
+  message String
+  meta Json
 }
