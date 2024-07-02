@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate';
-import { sign } from 'hono/jwt';
+import { sign, verify } from 'hono/jwt';
 
 
 // this below line is required to let hono know that we have a key named DATABASE_URL which must be a string
@@ -11,6 +11,19 @@ const app = new Hono<{
     JWT_SECRET: string
   }
 }>();
+
+app.use('/api/v1/blog/*', async (c, next) => {
+  const header = c.req.header("authorization") || "";
+  // Bearer token => ["Bearer","token"]
+  const token = header.split(" ")[1];
+  const response = await verify(token, c.env.JWT_SECRET)
+  if (response.id) {
+    next()
+  } else {
+    c.status(403);
+    return c.json({ error: "unauthorized" })
+  }
+})
 
 app.post('/api/v1/signup', async (c) => {
   const prisma = new PrismaClient({
