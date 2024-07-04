@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
@@ -9,7 +9,6 @@ const userRouter = new Hono<{
         JWT_SECRET: string
     }
 }>();
-
 
 userRouter.post('/signup', async (c) => {
     const body = await c.req.json();
@@ -25,10 +24,12 @@ userRouter.post('/signup', async (c) => {
                 name: body.name,
             }
         })
-        const jwt = await sign({
-            id: user.id
-        }, c.env.JWT_SECRET);
-        return c.text(jwt)
+        if(user){
+            const jwt = await sign({
+                id: user.id
+            }, c.env.JWT_SECRET);
+            return c.text(jwt)
+        }
     } catch (e) {
         console.log(e);
         c.status(411);
@@ -48,10 +49,12 @@ userRouter.post('/signin', async (c) => {
                 password: body.password,
             }
         })
-        const jwt = await sign({
-            id: user.id
-        }, c.env.JWT_SECRET);
-        return c.text(jwt)
+        if (user) {
+            const jwt = await sign({
+                id: user.id
+            }, c.env.JWT_SECRET);
+            return c.text(jwt)
+        }
     } catch (e) {
         console.log(e);
         c.status(411);
