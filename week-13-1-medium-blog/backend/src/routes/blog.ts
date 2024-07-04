@@ -18,7 +18,7 @@ blogRouter.use("/*", async(c, next) => {
     const user = await verify(authHeader,c.env.JWT_SECRET);
     if(user){
         c.set("userId",(user.id as string));
-        next();
+        await next();
     }else{
         c.status(403);
         return c.json({
@@ -39,7 +39,7 @@ blogRouter.post("/", async (c) => {
         data: {
             title: body.title,
             content: body.content,
-            authorId: userId
+            authorId: parseInt(userId)
         }
     })
 
