@@ -2,7 +2,7 @@ import Appbar from "../components/Appbar"
 import BlogCard from "../components/BlogCard"
 import { useBlogs } from "../hooks"
 
-interface BlogRes{
+export interface Blog{
     id:string;
     title:string;
     content:string;
@@ -21,13 +21,13 @@ const Blogs = () => {
         <div>
             <Appbar />
             <div className="flex flex-col px-4 justify-center py-8">
-                    {blogs.map((item: BlogRes,index) => <BlogCard
+                    {blogs && blogs.map((item: Blog,index:number) => <BlogCard
                         key={`${index}`}
                         id={item.id}
                         authorName={item.author.name}
                         title={item.title}
                         content={item.content}
-                        publishedDate={item.published}
+                        publishedDate={"28th September 2018"}
                     />)}
             </div>
         </div>
