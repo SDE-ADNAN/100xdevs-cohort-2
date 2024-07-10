@@ -3,6 +3,7 @@ import BlogCard from "../components/BlogCard"
 import { useBlogs } from "../hooks"
 
 interface BlogRes{
+    id:string;
     title:string;
     content:string;
     publishedDate:string;
@@ -19,16 +20,15 @@ const Blogs = () => {
     return (
         <div>
             <Appbar />
-            <div className="flex justify-center py-8">
-                <div className="w-xl">
+            <div className="flex flex-col px-4 justify-center py-8">
                     {blogs.map((item: BlogRes,index) => <BlogCard
                         key={`${index}`}
+                        id={item.id}
                         authorName={item.author.name}
                         title={item.title}
                         content={item.content}
                         publishedDate={item.published}
                     />)}
-                </div>
             </div>
         </div>
     )

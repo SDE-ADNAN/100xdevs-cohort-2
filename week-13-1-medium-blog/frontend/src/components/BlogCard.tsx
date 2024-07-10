@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 interface BlogCardProps {
+    id:string;
     authorName: string;
     title: string;
     content: string;
@@ -6,9 +9,10 @@ interface BlogCardProps {
 }
 
 
-const BlogCard = ({ authorName, title, content, publishedDate }: BlogCardProps) => {
+const BlogCard = ({ id, authorName, title, content, publishedDate }: BlogCardProps) => {
     return (
-        <div className="border-b-2 border-slate-200 py-4">
+        <Link to={`/blog/${id}`}>
+        <div className="border-b-2 border-slate-200 py-4 w-screen max-w-screen-lg">
             <div className="flex">
                 <Avatar name={authorName} />
                 <div className="font-extralight pl-2 text-sm flex justify-center flex-col">
@@ -25,12 +29,13 @@ const BlogCard = ({ authorName, title, content, publishedDate }: BlogCardProps) 
                 {title}
             </div>
             <div className="text-sm font-light">
-                {content.slice(0, 100)}...
+                {`${content.length > 100 ? content.slice(0, 100) + "..." : content}`}
             </div>
             <div className="text-slate-500 text-xs font-light pt-4">
                 {`${Math.ceil(content.length / 100)} min read`}
             </div>
         </div>
+        </Link>
     )
 }
 
@@ -43,7 +48,7 @@ w-1 rounded-full bg-slate-400">
     </div>
 }
 
-export function Avatar({ name,size = 5 }: { name: string ,size?:number}) {
+export function Avatar({ name, size = 5 }: { name: string, size?: number }) {
     return (
         <div className={`relative inline-flex items-center justify-center w-${size} h-${size} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600`}>
             <span className="font-xs font-extralight text-gray-600 dark:text-gray-300">
