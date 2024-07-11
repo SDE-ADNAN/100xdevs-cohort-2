@@ -1,19 +1,37 @@
 import Appbar from "../components/Appbar"
+import { Avatar } from "../components/BlogCard"
 import { Blog } from "./Blogs"
 
 
-export const FullBlog = ({blog}:{blog:Blog}) => {
-    if(!blog){
-        return "dsfd"
+export const FullBlog = ({ blog }: { blog: Blog }) => {
+    if (!blog) {
+        return "Loading......"
     }
     return <div >
         <Appbar />
-        <div className="grid grid-cols-12 px-10 w-full pt-200">
-            <div className="bg-red-200 col-span-8">
-                {blog.title}
-            </div>
-            <div className="bg-green-200 col-span-4">
-                {blog.content}
+        <div className="flex justify-center">
+            <div className="grid grid-cols-12 px-10 w-full pt-200 max-w-screen-2xl mt-12">
+                <div className="col-span-8">
+                    <div className="text-5xl font-extrabold">{blog.title}</div>
+                    <div className="text-slate-500 pt-4">
+                        Post on 2nd December 2023
+                    </div>
+                    <div className="pt-2">{blog.content}</div>
+                </div>
+                <div className="col-span-4">
+                    <div className="text-slate-600 text-lg">Author</div>
+                    <div className="flex w-full">
+                        <div className="pr-2">
+                            <Avatar name={blog.author.name} size={10} />
+                        </div>
+                        <div>
+                            <div className="text-xl font-bold">
+                                {blog.author.name || "Anonymus"}
+                            </div>
+                            <div className="pt-2 text-slate-500">Random catch phrase about the author's ability grab the users attention</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
