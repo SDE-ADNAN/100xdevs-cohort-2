@@ -16,6 +16,7 @@ export const useBlogs = () => {
             setIsLoading(false);
         })
     }, [])
+    
     return {
         loading,
         blogs
@@ -30,12 +31,14 @@ export const useBlog = (id: string) => {
     const config = {
         headers: { Authorization: `${token}` }
     };
+
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, config).then(response => {
             setBlog(response.data.blog);
             setIsLoading(false);
         })
     }, [])
+
     return {
         loading,
         blog

@@ -10,6 +10,7 @@ interface BlogCardProps {
 
 
 const BlogCard = ({ id, authorName, title, content, publishedDate }: BlogCardProps) => {
+
     return (
         <Link to={`/blog/${id}`}>
             <div className="border-b-2 border-slate-200 py-4 w-screen max-w-screen-lg">
@@ -43,8 +44,7 @@ const BlogCard = ({ id, authorName, title, content, publishedDate }: BlogCardPro
 export default BlogCard
 
 function Circle() {
-    return <div className="h-1
-w-1 rounded-full bg-slate-400">
+    return <div className="h-1 w-1 rounded-full bg-slate-400">
     </div>
 }
 

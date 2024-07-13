@@ -5,7 +5,9 @@ import axios from 'axios';
 import { BACKEND_URL } from "../config";
 
 const Auth = ({ type }: { type: "signup" | "signin" }) => {
+
     const navigate = useNavigate()
+
     const [postInputs, setPostInputs] = useState<SignupInput>({
         username: "",
         password: "",
@@ -22,6 +24,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
             console.log(e)
         }
     }
+
     return (
         <div className="h-screen flex justify-center flex-col">
             <div className="flex justify-center">
@@ -37,9 +40,10 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
                         </div>
                     </div>
                     <div className="pt-8">
-                        {type === "signup" ? <LabelledInput label='Name' placeholder="Adnan Khan..." onChange={(e) => {
-                            setPostInputs((state) => ({ ...state, name: e.target.value }))
-                        }} /> : ""}
+                        {type === "signup" ?
+                            <LabelledInput label='Name' placeholder="Adnan Khan..." onChange={(e) => {
+                                setPostInputs((state) => ({ ...state, name: e.target.value }))
+                            }} /> : ""}
                         <LabelledInput label='Username' placeholder="Adnan3621" onChange={(e) => {
                             setPostInputs((state) => ({ ...state, username: e.target.value }))
                         }} />
