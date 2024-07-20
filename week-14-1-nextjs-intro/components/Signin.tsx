@@ -1,3 +1,5 @@
+"use client"
+
 import CustomButton from "./CustomButton";
 
 function Signin({ children }: { children: React.ReactNode }) {
