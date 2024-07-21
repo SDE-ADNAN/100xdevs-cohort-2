@@ -1,4 +1,4 @@
-import axios from "axios";
+import { PrismaClient } from "@prisma/client";
 
 
 interface Address {
@@ -7,15 +7,24 @@ interface Address {
   houseNumber: string;
 }
 
-interface User {
-  name: string;
-  email: string;
-  address: Address;
-}
+type User = { name: string | undefined; email: string | undefined; } | undefined
+
+// async function getUserDetails() {
+//   const response = await axios.get("http://localhost:3000/api/user")
+//   return response.data;
+// }
+const client = new PrismaClient();
 
 async function getUserDetails() {
-  const response = await axios.get("http://localhost:3000/api/user")
-  return response.data;
+  try {
+    const user = await client.user.findFirst({});
+    return {
+      name: user?.username,
+      email: user?.username,
+    };
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 // async component
