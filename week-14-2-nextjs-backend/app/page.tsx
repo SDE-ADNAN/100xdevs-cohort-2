@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import client from '@/db';
 
 
 interface Address {
@@ -13,8 +13,6 @@ type User = { name: string | undefined; email: string | undefined; } | undefined
 //   const response = await axios.get("http://localhost:3000/api/user")
 //   return response.data;
 // }
-const client = new PrismaClient();
-
 async function getUserDetails() {
   try {
     const user = await client.user.findFirst({});
