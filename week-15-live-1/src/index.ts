@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import express from "express";
 
 const app = express();
-app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.json());
 
 const client = new PrismaClient();
 
@@ -13,12 +13,11 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-    console.log("Received POST request"); // Debugging statement
-    console.log("Request body:", req.body); // Debugging statement
+    console.log("Received POST request");
+    console.log("Request body:", req.body);
 
     const { email, name } = req.body;
 
-    // Check if email and name are provided
     if (!email || !name) {
         return res.status(400).json({ error: "Email and name are required." });
     }

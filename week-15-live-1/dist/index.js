@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
-app.use(express_1.default.json()); // Middleware to parse JSON bodies
+app.use(express_1.default.json());
 const client = new client_1.PrismaClient();
 app.get("/", (req, res) => {
     res.json({
@@ -23,10 +23,9 @@ app.get("/", (req, res) => {
     });
 });
 app.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Received POST request"); // Debugging statement
-    console.log("Request body:", req.body); // Debugging statement
+    console.log("Received POST request");
+    console.log("Request body:", req.body);
     const { email, name } = req.body;
-    // Check if email and name are provided
     if (!email || !name) {
         return res.status(400).json({ error: "Email and name are required." });
     }
