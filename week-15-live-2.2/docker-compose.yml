@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  mongodb:
+    image: 'mongo'
+    container_name: mongodb3621
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+  backend:
+    image: 'sdeadnan/week-15-class:v2'
+    container_name: backend_application
+    ports:
+      - '3000:3000'
+    environment:
+      MONGO_URL: 'mongodb://mongodb3621:27017'
+
+volumes:
+  mongodb_data:
+
+
