@@ -2,6 +2,7 @@
 
 # dev
 .yarn/
+.trubo/
 !.yarn/releases
 .vscode/*
 !.vscode/launch.json
