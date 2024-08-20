@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export function GET(){
+export function GET(req:NextRequest,arg:any){
+    console.log(arg.params.authRoutes)
     return NextResponse.json({
-        message:"from api/auth/..."
+        message:arg.params.authRoutes
     })
 }
